@@ -28,11 +28,14 @@ from .twins import PCPVT, SVT
 from .vgg import VGG
 from .vision_transformer import VisionTransformer
 
+from .gap8 import GAP8Net
 __all__ = [
     'LeNet5', 'AlexNet', 'VGG', 'RegNet', 'ResNet', 'ResNeXt', 'ResNetV1d',
     'ResNeSt', 'ResNet_CIFAR', 'SEResNet', 'SEResNeXt', 'ShuffleNetV1',
     'ShuffleNetV2', 'MobileNetV2', 'MobileNetV3', 'VisionTransformer',
     'SwinTransformer', 'TNT', 'TIMMBackbone', 'T2T_ViT', 'Res2Net', 'RepVGG',
     'Conformer', 'MlpMixer', 'DistilledVisionTransformer', 'PCPVT', 'SVT',
-    'EfficientNet', 'ConvNeXt', 'HRNet', 'ResNetV1c'
+    'EfficientNet', 'ConvNeXt', 'HRNet', 'ResNetV1c',
+
+    'GAP8Net'
 ]
