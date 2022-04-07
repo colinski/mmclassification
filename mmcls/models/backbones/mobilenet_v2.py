@@ -129,6 +129,7 @@ class MobileNetV2(BaseBackbone):
 
     def __init__(self,
                  widen_factor=1.,
+                 in_index=0,
                  out_indices=(7, ),
                  frozen_stages=-1,
                  conv_cfg=None,
@@ -145,6 +146,7 @@ class MobileNetV2(BaseBackbone):
                  ]):
         super(MobileNetV2, self).__init__(init_cfg)
         self.widen_factor = widen_factor
+        self.in_index = in_index
         self.out_indices = out_indices
         for index in out_indices:
             if index not in range(0, 8):
@@ -234,15 +236,17 @@ class MobileNetV2(BaseBackbone):
         return nn.Sequential(*layers)
 
     def forward(self, x):
-        x = self.conv1(x)
+        if self.in_index == 0:
+            x = self.conv1(x)
 
         outs = []
         for i, layer_name in enumerate(self.layers):
+            if i < self.in_index:
+                continue
             layer = getattr(self, layer_name)
             x = layer(x)
             if i in self.out_indices:
                 outs.append(x)
-
         return tuple(outs)
 
     def _freeze_stages(self):

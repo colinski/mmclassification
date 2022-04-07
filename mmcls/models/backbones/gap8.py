@@ -58,14 +58,14 @@ class NestedDropout(torch.nn.Module):
 @BACKBONES.register_module()
 class GAP8Net(BaseModule):
     def __init__(self, in_channels=1, 
-                 suffix_cfg=dict(),
+                 #suffix_cfg=dict(),
                  init_cfg=[dict(type='Kaiming', layer=['Conv2d']),
                            dict(type='Constant', val=1, bias=0, layer=['_BatchNorm'])]
         ):
         super(GAP8Net, self).__init__(init_cfg)
         self.init_cfg = init_cfg
         self.in_channels = in_channels
-        self.suffix = build_backbone(suffix_cfg)
+        #self.suffix = build_backbone(suffix_cfg)
         
         bias = False
         bn = dict(type='BN')
@@ -112,7 +112,7 @@ class GAP8Net(BaseModule):
         s3 = self.scale3(s2)
         s3 = self.nested_dropout(s3)
         s3 = self.norm(s3)
-        recon = self.upsample(s3)
-        out = self.suffix(recon)
+        #recon = self.upsample(s3)
+        #out = self.suffix(recon)
         #scales = (s0, s1, s2, s3)
-        return out
+        return s3
