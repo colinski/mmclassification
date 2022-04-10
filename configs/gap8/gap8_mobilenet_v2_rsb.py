@@ -154,7 +154,7 @@ test_pipeline = [
     dict(type='Collect', keys=['img'])
 ]
 data = dict(
-    samples_per_gpu=64,
+    samples_per_gpu=300,
     workers_per_gpu=4,
     train=dict(
         type='ImageNet',
@@ -292,5 +292,4 @@ resume_from = None
 workflow = [('train', 1)]
 sampler = dict(type='RepeatAugSampler')
 work_dir = './work_dirs/resnet50_8xb256-rsb-a1-600e_in1k'
-gpu_ids = range(0, 1)
 find_unused_parameters=True
